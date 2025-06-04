@@ -1,0 +1,22 @@
+name: Build and Upload Artifact
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build a file
+        run: |
+          mkdir output
+          echo "This is a test file from GitHub Actions!" > output/test.txt
+          zip -r build.zip output/
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-archive
+          path: build.zip
