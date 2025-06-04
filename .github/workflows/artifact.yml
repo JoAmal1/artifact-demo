@@ -1,10 +1,14 @@
 name: Build and Upload Artifact
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*'  # This means the workflow only runs when you push a tag like v1.0, v2.1 etc.
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,3 +24,8 @@ jobs:
         with:
           name: build-archive
           path: build.zip
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build.zip
