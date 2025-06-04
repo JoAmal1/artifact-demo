@@ -1,7 +1,7 @@
 name: Build and Upload Artifact
 
 on:
-  push:
+  push: 
     tags:
       - 'v*'  # This means the workflow only runs when you push a tag like v1.0, v2.1 etc.
 
